@@ -10,19 +10,17 @@ app.get('/', (req,res) => {
     res.sendFile(path.join(__dirname, './index.html'));
 });
 
-app.get('/:key', async (req,res) => {
-	const { key } = req.params;
+app.get('/order/cacheOrder', async (req,res) => {
 	const data = req.query;
-	const cacheOrder = {...data, date: new Date().toDateString()};
-	await redisClient.lpush(key, JSON.stringify(cacheOrder));
-	res.status(200).send("Success!");
+	const cacheOrder = {...data, date: new Date().getTime()};
+	await redisClient.lpush("cacheOrder", JSON.stringify(cacheOrder));
+	res.sendFile(path.join(__dirname, './index.html'));
 });
 
 app.get('/admin', async (req,res) => {
     // Get cached orders
     await redisClient.lrange("cacheOrder", 0, -1, function(err, items){
         const cacheOrders = items.map((order) => JSON.parse(order));
-        console.log(cacheOrders);
         // Using JSRender render template with results from cached orders
         var tmpl = jsrender.templates('./admin.html');
         var html = tmpl.render({orders: cacheOrders}); // Render
@@ -30,7 +28,7 @@ app.get('/admin', async (req,res) => {
     });
 });
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 })

@@ -13,10 +13,10 @@ services:
     links:
       - redis
     ports:
-      - 8080:8080
+      - 3000:3000
     environment:
       - REDIS_URL=redis://cache
       - NODE_ENV=development
-      - PORT=8080
+      - PORT=3000
     command:
       sh -c 'npm i && node server.js'

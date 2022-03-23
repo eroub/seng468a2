@@ -20,18 +20,18 @@
             </div>
         </nav>
 
-        <form action="/" method=""GET">
+        <form action="/order/cacheOrder" method="GET">
             <div class="form-group">
               <label for="name">Full Name:</label>
-              <input type="text" class="form-control" id="name">
+              <input type="text" class="form-control" id="name" name="name">
             </div>
             <div class="form-group">
               <label for="book">Book:</label>
-              <input type="text" class="form-control" id="book">
+              <input type="text" class="form-control" id="book" name="book">
             </div>
             <div class="form-group">
                 <label for="amount">Amount:</label>
-                <input type="number" class="form-control" id="amount">
+                <input type="number" class="form-control" id="amount" name="amount">
               </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>

@@ -21,7 +21,8 @@
             </div>
         </nav>
 
-        <p>Orders are sorted by when they were created</p>
+        <p>Dates are stored in milliseconds to give most accurate results</p>
+        <p>Newest orders will appear first</p>
 
         <table class="table">
             <thead>
@@ -33,6 +34,14 @@
               </tr>
             </thead>
             <tbody>
+                {{for orders}}
+                    <tr>
+                        <th>{{:date}}</th>
+                        <th>{{:name}}</th>
+                        <th>{{:book}}</th>
+                        <th>{{:amount}}</th>
+                    </tr>
+                {{/for}}
             </tbody>
           </table>
 
